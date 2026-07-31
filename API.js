@@ -8,22 +8,6 @@ app.get('/', (req, res) => {
     res.send('Task Manager API is running');
 });
 
-// To create a new task
-app.post('/tasks', (req, res) => {
-    const { task }= req.body
-    const newTask = {
-        id : task.length + 1,
-        task : task,
-        completed : "pending",
-    }
-
-    if(!task){
-        return 
-        res.status(404).json({error: 'Task needed'})
-    }else 
-        task.push(newTask)
-        res.status(201).json(newTask);
-})
 
 // To update an existing task
 app.patch("/tasks/:id", (req, res) => {
