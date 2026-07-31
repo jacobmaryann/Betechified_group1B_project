@@ -28,13 +28,16 @@ app.patch("/tasks/:id/status", (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
-  if (!status) {
-    return res.status(400).json({ error: "Status is required" });
-  }
+  const task = tasks.find( (t) => t.id === id)
 
-  // this would show the data in the console
-  console.log("Task status updated:", { id, status });
-  res.json({ id, status });
+  if (!task) {
+    return res.status(400).json({ error: "Task not found" });
+  }else if (!status){
+    return res.status(400).json({ error: "Status is required" });
+  }else
+    // this would show the data in the console
+    console.log("Task status updated:", { id, status });
+    res.json({ id, status });
 });
 
 // Toggle Status
