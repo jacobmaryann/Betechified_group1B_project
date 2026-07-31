@@ -8,6 +8,29 @@ app.get('/', (req, res) => {
     res.send('Task Manager API is running');
 });
 
+
+//in memory task array
+let tasks = [
+  { id: 1, title: 'Go groceries shopping', description: 'bread, eggs, tomatoes', status: 'Completed' },
+  { id: 2, title: 'Prepare dinner', description: 'Rice, Stew, Turkey', status: 'Pending' },
+];
+
+app.get('/', (req, res) => {
+    res.send('Task Manager API is running');
+});
+
+// To create new task
+app.post('/tasks', (req, res) => {
+    const {title} = req.body
+    if (!title) {
+        return res.status(400).json({error: "Title is required"});// Validation
+    };
+    const newTask = {id: tasks.length +1, ...req.body};
+    tasks.push(newTask);
+    res.status(201).json(newTask);
+});
+
+
 const PORT = process.env.PORT || 3002
 
 app.listen(PORT, () =>{
