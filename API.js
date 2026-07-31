@@ -9,6 +9,21 @@ app.get('/', (req, res) => {
 });
 
 
+// Get all tasks
+app.get('/tasks', (req, res) => {
+  res.status(200).json(tasks); // Send array as JSON
+});
+
+//Get single task
+app.get('/tasks/:id', (req, res) => {
+    const id = parseInt(req.params.id)
+    const task = tasks.find(task => task.id === id);
+    if (!task) {
+        return res.status(404).json({error: "Task not found"});
+    };
+    res.json(task)
+});
+
 //in memory task array
 let tasks = [
   { id: 1, title: 'Go groceries shopping', description: 'bread, eggs, tomatoes', status: 'Completed' },
