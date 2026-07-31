@@ -23,5 +23,5 @@ app.delete('/tasks/:id', (req, res) => {
         return res.status(404).json({ message: `Task with ID ${id} not found` });
     }
 
-    res.status(204).send();
+    res.status(204).send(); // Silent success
 });
