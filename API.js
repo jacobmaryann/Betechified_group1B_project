@@ -11,19 +11,18 @@ app.get('/', (req, res) => {
 // To create a new task
 app.post('/tasks', (req, res) => {
     const { task }= req.body
-    const newTodo = {
-        id : todos.length + 1,
+    const newTask = {
+        id : task.length + 1,
         task : task,
         completed : "pending",
-        dueDate : req.body.dueDate || null
     }
 
     if(!task){
         return 
         res.status(404).json({error: 'Task needed'})
     }else 
-        todos.push(newTodo)
-        res.status(201).json(newTodo);
+        task.push(newTask)
+        res.status(201).json(newTask);
 })
 
 // To update an existing task
